@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CUKURAKU – Katalog & Reservasi Barbershop</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6EFE2;--card:#FFFBF3;--hov:#EFE4CF;--bd:#DCCDB0;--gold:#9A6B12;--gl:#7A520A;--cream:#2A2118;--mut:#7B6D58;--ink:#1A1208;--red:#C8452F;--blue:#2F5DA8;--green:#2F7D55;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F0D0B;--card:#1E1812;--hov:#2A2118;--bd:#3A2F22;--gold:#D4A64A;--gl:#F0CD7E;--cream:#F4EBDD;--mut:#A39683;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F0D0B;--card:#1E1812;--hov:#2A2118;--bd:#3A2F22;--gold:#D4A64A;--gl:#F0CD7E;--cream:#F4EBDD;--mut:#A39683;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--cream);font:15px/1.5 Figtree,system-ui,sans-serif;min-height:100vh}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{background:var(--hov);border:1px solid var(--bd);border-radius:6px;padding:9px 11px;width:100%}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+label{display:block;font-weight:600;margin:12px 0 4px}
+.btn{background:var(--gold);color:#1A1208;border:0;border-radius:6px;padding:9px 16px;font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn.dk{background:var(--hov);color:var(--cream);border:1px solid var(--bd)}.btn.gr{background:var(--green);color:#fff}.btn.rd{background:var(--red);color:#fff}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:12px 20px;border-bottom:3px solid var(--gold);background:linear-gradient(90deg,#3B2A14,#120F0B);color:#F0CD7E}
+header h1{font-size:22px;margin-right:auto}
+header nav{display:flex;flex-wrap:wrap;gap:4px}
+header nav button{background:none;border:0;color:#E9DCC3;padding:6px 10px;border-radius:6px;cursor:pointer}
+header nav button.on{background:#D4A64A;color:#1A1208}
+main{max-width:1040px;margin:0 auto;padding:22px 18px 60px}
+.sub{color:var(--mut)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:16px}
+.tile{cursor:pointer;text-align:left;width:100%}.tile:hover{background:var(--hov)}
+.ico{width:60px;height:60px;border-radius:50%;background:#D4A64A;color:#1A1208;display:grid;place-items:center;font-size:26px;margin-bottom:8px}
+.price{font:800 20px Fraunces,Georgia,serif;color:var(--gold)}
+.stat b{display:block;font:800 22px Fraunces,Georgia,serif;color:var(--gl)}
+.two{display:grid;gap:20px;grid-template-columns:1fr 300px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.row{display:flex;justify-content:space-between;gap:12px;padding:5px 0}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:760px}
+th{background:#D4A64A;color:#1A1208;text-align:left;padding:8px}td{padding:8px;border-bottom:1px solid var(--bd)}
+tr.sel td{background:var(--hov)}.st-Selesai{color:var(--green)}.st-Dibatalkan{color:var(--red)}.st-Dikonfirmasi{color:var(--gold)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal button{border:1px solid var(--bd);background:var(--card);border-radius:6px;padding:6px 2px;min-height:54px;cursor:pointer;font-size:12px}
+.cal button.busy{background:var(--hov);color:var(--gl)}.cal button.today{border-color:var(--gold)}.cal button.sel{background:var(--gold);color:#1A1208}
+.cal .hd{text-align:center;font-weight:600;color:var(--gold)}
+.bar{height:22px;background:#D4A64A;border-radius:3px;min-width:3px}
+.pole{width:34px;border-radius:17px;border:2px solid var(--gold);background:repeating-linear-gradient(135deg,#C8452F 0 14px,#f5f5f5 14px 28px,#2F5DA8 28px 42px,#f5f5f5 42px 56px);background-size:80px 80px;animation:pole 1.4s linear infinite}
+@keyframes pole{to{background-position:0 80px}}
+@media(prefers-reduced-motion:reduce){.pole{animation:none}}
+.login{display:flex;gap:26px;align-items:stretch;max-width:760px;margin:30px auto}
+.login .card{flex:1}.tabs{display:flex;gap:6px;margin-bottom:6px}
+.modal{position:fixed;inset:0;background:#000a;display:grid;place-items:center;padding:16px;z-index:9}
+.modal .card{max-width:460px;width:100%;max-height:92vh;overflow:auto;background:var(--card)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--gold);color:#1A1208;padding:10px 18px;border-radius:8px;font-weight:600;z-index:10}
+.ok{color:var(--green)}.no{color:var(--red)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const APP="CUKURAKU",ALAMAT="Jl. Raya Medokan Sawah No.4, Gunung Anyar, Rungkut, Surabaya 60294",WA="62895381616224",BUKA=9,TUTUP=21,DP=50,HP=/^(\+62|62|0)8\d{8,11}$/;
+const HARI=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"],BULAN="Januari Februari Maret April Mei Juni Juli Agustus September Oktober November Desember".split(" ");
+const L=[[1,"Haircut",30000,1,3,"Potong rambut sesuai model pilihan Anda, dikerjakan rapi oleh barber berpengalaman.","✂"],[2,"Hair Stylist",35000,1,3,"Potong rambut sekaligus penataan (styling) supaya langsung siap tampil.","★"],[3,"Haircut for Kids",30000,1,1,"Layanan potong rambut khusus anak-anak, dengan pendekatan sabar dan nyaman.","☺"],[4,"Haircut Full Service",35000,1,3,"Paket potong rambut lengkap dengan pelayanan penuh dari awal sampai selesai.","♛"],[5,"Toning",45000,1,3,"Penyesuaian warna rambut agar tampilan lebih segar dan serasi.","◐"],[6,"Coloring",150000,2,3,"Pewarnaan rambut menyeluruh. Membutuhkan waktu sekitar 2 jam.","✿"],[7,"Haircut + Wash",32000,1,3,"Potong rambut ditambah keramas supaya rambut bersih dan segar.","≋"]].map(a=>({id:a[0],nama:a[1],harga:a[2],durasi:a[3],kap:a[4],desc:a[5],ikon:a[6]}));
+const B=[{id:1,nama:"Davit",sp:"Haircut & Styling"},{id:2,nama:"Rudi",sp:"Haircut Anak-anak & Coloring"},{id:3,nama:"Wahyu",sp:"Haircut & Toning"}];
+const ADMIN_HASH="240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9";
+const p2=n=>String(n).padStart(2,"0"),iso=d=>`${d.getFullYear()}-${p2(d.getMonth()+1)}-${p2(d.getDate())}`;
+const rp=n=>"Rp "+Math.round(n).toLocaleString("id-ID"),tgl=s=>s.split("-").reverse().join("-");
+const e=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const lay=id=>L.find(x=>x.id==id),bar=id=>B.find(x=>x.id==id);
+function load(){try{return JSON.parse(localStorage.getItem("cukuraku")||"[]")}catch(x){return[]}}
+function save(){try{localStorage.setItem("cukuraku",JSON.stringify(S.res))}catch(x){}}
+const t0=new Date();
+const S={user:null,view:"login",res:load(),f:{lid:"",bid:"",tgl:iso(t0),jam:"",jml:1,nama:"",hp:"",cat:""},q:"",st:"Semua",sel:null,detail:null,confirm:null,cal:{y:t0.getFullYear(),m:t0.getMonth(),d:iso(t0)},tab:0,err:""};
+const admin=()=>S.user&&S.user.role=="admin";
+const active=r=>r.status!="Dibatalkan";
+
+/* --- logika data (versi JavaScript dari kelas Database) --- */
+const nextCode=()=>"CK"+String(S.res.reduce((m,r)=>Math.max(m,r.id),0)+1).padStart(4,"0");
+function isFree(bid,d,s,en){return !S.res.some(r=>r.bid==bid&&r.tgl==d&&active(r)&&r.mulai<en&&r.selesai>s)}
+function slots(lid,bid,d){const du=lay(lid).durasi,now=new Date(),out=[];
+ for(let h=BUKA;h<TUTUP;h++){if(h+du>TUTUP)break;if(d==iso(now)&&h<=now.getHours())continue;
+  const s=p2(h)+":00",en=p2(h+du)+":00";if(isFree(bid,d,s,en))out.push([s,en])}return out}
+function stats(){const r=S.res.filter(x=>x.status!="Dibatalkan"),tot=r.reduce((a,x)=>a+x.total,0);
+ const bs={};r.forEach(x=>{(bs[x.lid]=bs[x.lid]||{total:0,n:0});bs[x.lid].total+=x.total;bs[x.lid].n++});
+ return{tot,n:r.length,avg:r.length?tot/r.length:0,bs:Object.entries(bs).map(([k,v])=>({nama:lay(k).nama,...v})).sort((a,b)=>b.total-a.total)}}
+async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>p2(x.toString(16))).join("")}
+
+/* --- tampilan --- */
+const NAV=[["home","Beranda"],["katalog","Katalog"],["barber","Barber"],["reservasi","Reservasi"],["riwayat","Riwayat"],["kalender","Kalender"],["stat","Statistik"],["tentang","Tentang"]];
+function render(){const a=document.getElementById("app");
+ if(!S.user){a.innerHTML=V.login();return}
+ const nav=NAV.filter(n=>n[0]!="stat"||admin()).map(n=>`<button class="${S.view==n[0]?"on":""}" data-a="go" data-v="${n[0]}">${n[1]}</button>`).join("");
+ a.innerHTML=`<header><h1>✂ ${APP}</h1><nav>${nav}<button data-a="logout">Keluar</button></nav></header><main>${V[S.view]()}</main>${S.detail?V.detailModal():""}${S.confirm?V.confirmModal():""}`}
+const head=(t,s)=>`<h2 style="font-size:28px;color:var(--gl)">${t}</h2><p class="sub" style="margin:2px 0 18px">${s||""}</p>`;
+const V={
+login(){return`<div class="login"><div class="pole" aria-hidden="true"></div><div class="card"><h1 style="font-size:34px;color:var(--gl)">${APP}</h1><p class="sub">Rapi itu pilihan, reservasi itu mudah.</p>
+<div class="tabs"><button class="btn ${S.tab?"dk":""}" data-a="tab" data-v="0">Pelanggan</button><button class="btn ${S.tab?"":"dk"}" data-a="tab" data-v="1">Admin</button></div>
+${S.tab?`<label>Username</label><input id="lu" value="admin"><label>Password</label><input id="lp" type="password" placeholder="admin123">`:`<label>Nama lengkap</label><input id="ln"><label>No. WhatsApp / HP</label><input id="lh" placeholder="081234567890">`}
+<p class="no" role="alert">${e(S.err)}</p><button class="btn" style="width:100%" data-a="login">Masuk sebagai ${S.tab?"Admin":"Pelanggan"}</button></div></div>`},
+home(){const td=iso(new Date()),n=S.res.filter(r=>active(r)&&r.tgl==td).length,nx=S.res.filter(r=>active(r)&&r.tgl>td).length;
+ const T=[["✂","Katalog Layanan","Lihat 7 layanan beserta harga","katalog"],["☻","Barber Kami","Kenali tim barber","barber"],["✎","Buat Reservasi","Pilih jadwal & bayar DP","reservasi"],["☰","Riwayat Reservasi","Cari, ekspor, kelola data","riwayat"],["▦","Kalender Jadwal","Lihat hari yang ramai","kalender"],...(admin()?[["▲","Statistik Usaha","Khusus admin","stat"]]:[]),["ⓘ","Tentang Kami","Jam buka & kontak","tentang"]];
+ return head(`Halo, ${e(S.user.nama)}`,`Masuk sebagai ${S.user.role}`)+`<div class="grid" style="margin-bottom:20px"><div class="card stat"><b>${n}</b>Booking hari ini</div><div class="card stat"><b>${nx}</b>Booking mendatang</div><div class="card stat"><b>${BUKA}.00–${TUTUP}.00</b>Jam buka setiap hari</div></div>`+
+ `<div class="grid">${T.map(t=>`<button class="card tile" data-a="go" data-v="${t[3]}"><div class="ico">${t[0]}</div><h3>${t[1]}</h3><span class="sub">${t[2]}</span></button>`).join("")}</div>`},
+katalog(){const k=S.q.toLowerCase(),items=L.filter(x=>x.nama.toLowerCase().includes(k));
+ return head("Katalog Layanan","Harga, durasi, dan kapasitas kursi")+`<input id="q" placeholder="Cari layanan…" value="${e(S.q)}" style="max-width:320px;margin-bottom:14px"><div class="grid">${items.map(x=>`<div class="card" style="text-align:center"><div class="ico" style="margin:0 auto 8px">${x.ikon}</div><h3>${x.nama}</h3><div class="price">${rp(x.harga)}</div><p class="sub">${x.durasi} jam • ${x.kap} kursi</p><button class="btn dk" data-a="detail" data-v="${x.id}">Lihat Detail</button></div>`).join("")||"<p class=sub>Tidak ada layanan yang cocok.</p>"}</div>`},
+detailModal(){const x=lay(S.detail),n=S.res.filter(r=>r.lid==x.id&&active(r)).length;
+ return`<div class="modal" data-a="close"><div class="card" data-stop><div class="ico">${x.ikon}</div><h2>${x.nama}</h2><div class="price">${rp(x.harga)}</div><p class="sub">Durasi ${x.durasi} jam • Kapasitas ${x.kap} kursi</p><p>${x.desc}</p><div class="row"><span class="sub">Dipesan</span><b>${n}x</b></div><div class="row"><span class="sub">DP minimal</span><b>${rp(x.harga*DP/100)}</b></div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-a="pesanLayanan" data-v="${x.id}">Reservasi Layanan Ini</button><button class="btn dk" data-a="close">Tutup</button></div></div></div>`},
+barber(){return head("Barber Kami","Pilih barber favorit Anda")+`<div class="grid">${B.map((b,i)=>{const r=S.res.filter(x=>x.bid==b.id&&active(x)),c={};r.forEach(x=>c[x.lid]=(c[x.lid]||0)+1);const fav=Object.entries(c).sort((a,b)=>b[1]-a[1])[0],td=r.filter(x=>x.tgl==iso(new Date())).length;
+ return`<div class="card" style="text-align:center"><div class="ico" style="margin:0 auto 8px;width:80px;height:80px;font:800 34px Fraunces,serif;background:${["#D4A64A","#8FB7E0","#E0A0A0"][i]}">${b.nama[0]}</div><h3>${b.nama}</h3><p class="sub">${b.sp}</p><div class="row"><span class="sub">Pelanggan dilayani</span><b>${r.length}</b></div><div class="row"><span class="sub">Layanan favorit</span><b>${fav?lay(fav[0]).nama:"-"}</b></div><div class="row"><span class="sub">Jadwal hari ini</span><b>${td} booking</b></div><button class="btn" style="margin-top:10px" data-a="pesanBarber" data-v="${b.id}">Pesan dengan ${b.nama}</button></div>`}).join("")}</div>`},
+reservasi(){const f=S.f,l=f.lid&&lay(f.lid),sl=l&&f.bid?slots(f.lid,f.bid,f.tgl):[];
+ const days=[...Array(14)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return[iso(d),`${HARI[d.getDay()]}, ${tgl(iso(d))}`]});
+ const jml=l?Math.min(f.jml,l.kap):1,tot=l?l.harga*jml:0,dp=tot*DP/100;
+ const so=(arr,v)=>arr.map(([k,t])=>`<option value="${k}" ${k==v?"selected":""}>${t}</option>`).join("");
+ return head("Buat Reservasi","Isi data, pilih jadwal, lalu bayar DP")+`<div class="two"><div class="card">
+<label>Nama pelanggan</label><input data-f="nama" value="${e(f.nama)}"><label>No. HP / WhatsApp</label><input data-f="hp" value="${e(f.hp)}">
+<label>Layanan</label><select data-f="lid"><option value="">Pilih layanan</option>${so(L.map(x=>[x.id,`${x.nama} – ${rp(x.harga)}`]),f.lid)}</select>
+<label>Barber</label><select data-f="bid"><option value="">Pilih barber</option>${so(B.map(x=>[x.id,x.nama]),f.bid)}</select>
+<label>Tanggal</label><select data-f="tgl">${so(days,f.tgl)}</select>
+<label>Jam</label><select data-f="jam"><option value="">Pilih jam</option>${so(sl.map(s=>[s.join(" - "),s.join(" - ")]),f.jam)}</select>
+<small class="${l&&f.bid?(sl.length?"ok":"no"):"sub"}">${l&&f.bid?(sl.length?sl.length+" jam masih kosong":"Tidak ada jam kosong. Coba tanggal atau barber lain."):"Pilih layanan dan barber untuk melihat jam kosong."}</small>
+<label>Jumlah unit (maks ${l?l.kap:3})</label><input type="number" min="1" max="${l?l.kap:3}" data-f="jml" value="${jml}"><label>Catatan / model</label><textarea data-f="cat" rows="3">${e(f.cat)}</textarea></div>
+<div class="card" style="align-self:start"><h3>Ringkasan Biaya</h3><div class="row"><span class="sub">Harga / unit</span><b>${l?rp(l.harga):"-"}</b></div><div class="row"><span class="sub">Jumlah</span><b>${jml}</b></div><div class="row"><span class="sub">Total</span><b>${rp(tot)}</b></div><div class="row"><span class="sub">DP (${DP}%)</span><b>${rp(dp)}</b></div><div class="row"><span class="sub">Sisa bayar di tempat</span><b>${rp(tot-dp)}</b></div><p class="sub" style="font-size:13px">DP dibayar saat konfirmasi. Jadwal terkunci setelah DP.</p><p class="no" role="alert">${e(S.err)}</p><button class="btn" style="width:100%" data-a="lanjut">Lanjut ke Konfirmasi ›</button></div></div>`},
+confirmModal(){const d=S.confirm,t=new Date(d.tgl+"T00:00");
+ return`<div class="modal"><div class="card"><h2>Konfirmasi Pesanan</h2>${[["Pelanggan",d.nama],["Layanan",lay(d.lid).nama],["Barber",bar(d.bid).nama],["Tanggal",HARI[t.getDay()]+", "+tgl(d.tgl)],["Jam",d.mulai+" - "+d.selesai],["Jumlah",d.jml],["Catatan",d.cat||"-"]].map(r=>`<div class="row"><span class="sub">${r[0]}</span><b>${e(r[1])}</b></div>`).join("")}
+<p><b>Total: ${rp(d.total)}</b><br><span style="color:var(--gold)">DP sekarang: ${rp(d.dp)}</span></p><label>Metode pembayaran DP</label><select id="met"><option>QRIS</option><option>Transfer Bank</option><option>Tunai di tempat</option></select>
+<label style="font-weight:400"><input type="checkbox" id="agree" style="width:auto"> Saya setuju DP tidak dikembalikan bila batal di hari H.</label><p class="no" role="alert">${e(S.err)}</p>
+<div style="display:flex;gap:8px"><button class="btn gr" data-a="bayar">Bayar DP & Simpan</button><button class="btn dk" data-a="kembali">Kembali</button></div></div></div>`},
+riwayat(){const k=S.q.toLowerCase(),rs=rows().filter(r=>(S.st=="Semua"||r.status==S.st)&&[r.kode,r.nama,lay(r.lid).nama,bar(r.bid).nama].join(" ").toLowerCase().includes(k)),tot=rs.filter(active).reduce((a,r)=>a+r.total,0);
+ return head("Riwayat Reservasi",admin()?"Semua data reservasi":"Reservasi atas nama Anda")+`<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px"><input id="q" placeholder="Cari kode, nama, layanan, barber…" value="${e(S.q)}" style="max-width:300px"><select id="st" style="max-width:170px">${["Semua","Dikonfirmasi","Selesai","Dibatalkan"].map(s=>`<option ${s==S.st?"selected":""}>${s}</option>`).join("")}</select><button class="btn dk" data-a="csv">Ekspor CSV</button></div>
+<div class="wrap card" style="padding:0"><table><tr><th>Kode</th><th>Pelanggan</th><th>Layanan</th><th>Barber</th><th>Tanggal</th><th>Jam</th><th>Total</th><th>DP</th><th>Status</th></tr>${rs.map(r=>`<tr data-a="pilih" data-v="${r.id}" class="${S.sel==r.id?"sel":""}" style="cursor:pointer"><td>${r.kode}</td><td>${e(r.nama)}</td><td>${lay(r.lid).nama}</td><td>${bar(r.bid).nama}</td><td>${tgl(r.tgl)}</td><td>${r.mulai}-${r.selesai}</td><td>${rp(r.total)}</td><td>${rp(r.dp)}</td><td class="st-${r.status}">${r.status}</td></tr>`).join("")||`<tr><td colspan=9 class=sub>Belum ada reservasi. Buat yang pertama lewat menu Reservasi.</td></tr>`}</table></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px"><b style="margin-right:auto;color:var(--gold)">${rs.length} data • Nilai transaksi: ${rp(tot)}</b><button class="btn dk" data-a="ubah" data-v="Dibatalkan">Batalkan Reservasi</button>${admin()?`<button class="btn gr" data-a="ubah" data-v="Selesai">Tandai Selesai</button><button class="btn rd" data-a="ubah" data-v="hapus">Hapus</button>`:""}</div><p class="sub">Klik satu baris untuk memilih data, lalu pilih aksi.</p>`},
+kalender(){const c=S.cal,first=new Date(c.y,c.m,1),off=(first.getDay()+6)%7,n=new Date(c.y,c.m+1,0).getDate(),td=iso(new Date()),cnt={};
+ S.res.filter(active).forEach(r=>{if(r.tgl.startsWith(`${c.y}-${p2(c.m+1)}-`))cnt[+r.tgl.slice(8)]=(cnt[+r.tgl.slice(8)]||0)+1});
+ const cells=[...Array(off)].map(()=>"<span></span>").concat([...Array(n)].map((_,i)=>{const d=`${c.y}-${p2(c.m+1)}-${p2(i+1)}`;return`<button data-a="hari" data-v="${d}" class="${d==c.d?"sel":d==td?"today":cnt[i+1]?"busy":""}">${i+1}<br>${cnt[i+1]?cnt[i+1]+" booking":"&nbsp;"}</button>`}));
+ const dl=S.res.filter(r=>r.tgl==c.d&&active(r)).sort((a,b)=>a.mulai.localeCompare(b.mulai)),dd=new Date(c.d+"T00:00");
+ return head("Kalender Jadwal","Lihat hari ramai, klik tanggal untuk detail")+`<div class="two"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><button class="btn dk" data-a="bulan" data-v="-1">‹</button><h3>${BULAN[c.m]} ${c.y}</h3><button class="btn dk" data-a="bulan" data-v="1">›</button></div><div class="cal">${["Sen","Sel","Rab","Kam","Jum","Sab","Min"].map(h=>`<div class="hd">${h}</div>`).join("")}${cells.join("")}</div></div>
+<div class="card" style="align-self:start"><h3>${HARI[dd.getDay()]}, ${tgl(c.d)}</h3>${dl.map(r=>admin()?`<div class="row"><span>${r.mulai} ${e(r.nama)}</span><span class="sub">${lay(r.lid).nama} • ${bar(r.bid).nama}</span></div>`:`<div class="row"><span>${r.mulai}-${r.selesai} terisi</span><span class="sub">${bar(r.bid).nama}</span></div>`).join("")||"<p class=sub>Belum ada booking.</p>"}</div></div>`},
+stat(){const s=stats(),mx=Math.max(1,...s.bs.map(x=>x.total)),bc=B.map(b=>[b.nama,S.res.filter(r=>r.bid==b.id&&active(r)).length]),mb=Math.max(1,...bc.map(x=>x[1]));
+ return head("Statistik Usaha","Ringkasan pendapatan & performa barber")+`<div class="grid" style="margin-bottom:18px">${[[rp(s.tot),"Total pendapatan"],[s.n,"Total transaksi"],[rp(s.avg),"Rata-rata / transaksi"],[s.bs[0]?s.bs[0].nama:"-","Layanan terlaris (omzet)"]].map(x=>`<div class="card stat"><b>${x[0]}</b>${x[1]}</div>`).join("")}</div>
+<div class="two" style="grid-template-columns:1fr 1fr"><div class="card"><h3>Pendapatan per layanan</h3>${s.bs.map(x=>`<p style="margin:10px 0 2px">${x.nama} <span class="sub">• ${x.n}x • ${rp(x.total)}</span></p><div class="bar" style="width:${x.total/mx*100}%"></div>`).join("")||"<p class=sub>Belum ada transaksi.</p>"}</div>
+<div class="card"><h3>Pelanggan per barber</h3>${bc.map(x=>`<p style="margin:10px 0 2px">${x[0]} <span class="sub">• ${x[1]} pelanggan</span></p><div class="bar" style="width:${x[1]/mb*100}%"></div>`).join("")}</div></div>`},
+tentang(){return head("Tentang Kami","UMKM potong rambut yang suka rapi")+`<div class="card">${[["Jam buka",`Setiap hari, ${BUKA}.00 – ${TUTUP}.00`],["Alamat",ALAMAT],["Kapasitas","3 kursi (1 kursi untuk layanan anak)"],["Tim barber",B.map(b=>b.nama).join(", ")],["Kebijakan DP",DP+"% dari total saat reservasi"]].map(r=>`<div class="row"><span class="sub">${r[0]}</span><b style="text-align:right">${r[1]}</b></div>`).join("")}</div><p style="display:flex;gap:8px;margin-top:14px"><a class="btn gr" style="text-decoration:none" target="_blank" rel="noopener" href="https://wa.me/${WA}">Chat WhatsApp</a><a class="btn dk" style="text-decoration:none" target="_blank" rel="noopener" href="https://www.google.com/maps/search/CUKURAKU">Buka Google Maps</a></p>`}};
+const rows=()=>(admin()?S.res:S.res.filter(r=>r.nama.toLowerCase()==S.user.nama.toLowerCase())).slice().sort((a,b)=>(b.tgl+b.mulai).localeCompare(a.tgl+a.mulai));
+function toast(m){const t=document.createElement("div");t.className="toast";t.textContent=m;document.body.append(t);setTimeout(()=>t.remove(),2600)}
+function go(v){S.view=v;S.q="";S.st="Semua";S.sel=null;S.err="";render()}
+
+/* --- aksi --- */
+const A={
+ go:v=>go(v),tab:v=>{S.tab=+v;S.err="";render()},
+ async login(){const g=id=>(document.getElementById(id)||{}).value||"";
+  if(S.tab){if(g("lu").trim()=="admin"&&await sha(g("lp"))==ADMIN_HASH){S.user={nama:"Admin CUKURAKU",hp:"",role:"admin"}}else{S.err="Username atau password salah.";return render()}}
+  else{const n=g("ln").trim(),h=g("lh").replace(/[\s-]/g,"");if(n.length<2){S.err="Nama minimal 2 karakter.";return render()}
+   if(!HP.test(h)){S.err="Gunakan format 08xxxxxxxxxx atau +628xxxxxxxxxx.";return render()}S.user={nama:n,hp:h,role:"pelanggan"};S.f.nama=n;S.f.hp=h}
+  S.err="";go("home")},
+ logout(){if(confirm("Yakin ingin keluar dari akun?")){S.user=null;S.view="login";render()}},
+ detail:v=>{S.detail=+v;render()},close(){S.detail=null;render()},
+ pesanLayanan(v){S.f.lid=+v;S.detail=null;go("reservasi")},pesanBarber(v){S.f.bid=+v;go("reservasi")},
+ lanjut(){const f=S.f,l=lay(f.lid),h=f.hp.replace(/[\s-]/g,"");
+  if(f.nama.trim().length<2)S.err="Nama minimal 2 karakter.";else if(!HP.test(h))S.err="Nomor HP harus berformat 08xxxxxxxxxx.";else if(!(l&&f.bid&&f.jam))S.err="Pilih layanan, barber, tanggal, dan jam.";
+  else{S.err="";const[m,s]=f.jam.split(" - "),j=Math.min(Math.max(1,+f.jml||1),l.kap),t=l.harga*j;S.confirm={nama:f.nama.trim(),hp:h,lid:l.id,bid:+f.bid,tgl:f.tgl,mulai:m,selesai:s,jml:j,total:t,dp:t*DP/100,cat:f.cat.trim()}}render()},
+ kembali(){S.confirm=null;S.err="";render()},
+ bayar(){if(!document.getElementById("agree").checked){S.err="Centang persetujuan terlebih dahulu.";return render()}
+  const d=S.confirm;if(!isFree(d.bid,d.tgl,d.mulai,d.selesai)){S.err="Jadwal baru saja terisi. Pilih jam lain.";S.confirm=null;return render()}
+  const kode=nextCode();S.res.push({...d,id:S.res.reduce((m,r)=>Math.max(m,r.id),0)+1,kode,metode:document.getElementById("met").value,status:"Dikonfirmasi"});save();
+  S.confirm=null;S.err="";S.f={...S.f,lid:"",bid:"",jam:"",jml:1,cat:""};toast("Reservasi "+kode+" tersimpan");go("riwayat")},
+ pilih(v){S.sel=+v;render()},
+ ubah(v){if(!S.sel)return toast("Klik salah satu baris terlebih dahulu.");
+  if(!confirm(v=="hapus"?"Yakin ingin menghapus?":"Yakin ingin mengubah status menjadi "+v+"?"))return;
+  if(v=="hapus")S.res=S.res.filter(r=>r.id!=S.sel);else S.res.find(r=>r.id==S.sel).status=v;S.sel=null;save();render()},
+ hari(v){S.cal.d=v;render()},bulan(v){const c=S.cal,d=new Date(c.y,c.m+ +v,1);c.y=d.getFullYear();c.m=d.getMonth();render()},
+ csv(){const q=x=>`"${String(x??"").replace(/"/g,'""')}"`,r=[["Kode","Pelanggan","Layanan","Barber","Tanggal","Jam","Total","DP","Status","Catatan"]].concat(rows().map(r=>[r.kode,r.nama,lay(r.lid).nama,bar(r.bid).nama,tgl(r.tgl),r.mulai+"-"+r.selesai,r.total,r.dp,r.status,r.cat]));
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+r.map(x=>x.map(q).join(",")).join("\n")],{type:"text/csv"}));a.download="riwayat_cukuraku.csv";a.click()}
+};
+document.addEventListener("click",ev=>{if(ev.target.closest("[data-stop]")&&!ev.target.closest("button"))return;const t=ev.target.closest("[data-a]");if(t&&A[t.dataset.a])A[t.dataset.a](t.dataset.v)});
+document.addEventListener("input",ev=>{const t=ev.target;if(t.dataset.f&&["nama","hp","cat"].includes(t.dataset.f))S.f[t.dataset.f]=t.value;
+ if(t.id=="q"){S.q=t.value;const p=t.selectionStart;render();const n=document.getElementById("q");n.focus();n.setSelectionRange(p,p)}});
+document.addEventListener("change",ev=>{const t=ev.target;if(t.dataset.f&&!["nama","hp","cat"].includes(t.dataset.f)){S.f[t.dataset.f]=t.value;if(["lid","bid","tgl"].includes(t.dataset.f))S.f.jam="";render()}
+ if(t.id=="st"){S.st=t.value;render()}});
+render();
+</script>
+</body>
+</html>
